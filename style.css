@@ -1,0 +1,49 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: 1px solid rgb(0, 75, 249);
+}
+
+.main_box {
+    width: 600px;
+    /* border: 1px solid black; */
+
+
+}
+.caja_tareas {
+    margin: 20px;
+}
+
+.detalle_tareas {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.box_tareas {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    
+    
+}
+
+.tareas_resumen {
+    width: 200px;
+}
+.lista_tareas, .lista_id {
+    /* border: 1px solid black; */
+    margin: 20px;
+    width: 300px;
+}
+
+.lista_id {
+    width: 90px;
+}
+
+.lista_tareas {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

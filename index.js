@@ -1,30 +1,35 @@
+const listaDeId = document.querySelector("#ID");
 const listaDeTareas = document.querySelector("#tareas");
 const tareaInput = document.querySelector("#nuevaTarea");
 const btnAgregar = document.querySelector("#agregarTarea");
-const resumenTareas = document.querySelector("#resumenTareas"); // Nuevo elemento en el DOM
+const resumenTareas = document.querySelector("#resumenTareas");
 const tareas = [];
 let tareasRealizadas = 0;
 let tareasTotales = 0;
 
-/* Actualizamos la información en el HTML */
 function renderTareas() {
   let html = "";
+  let idHtml = "";
   tareasTotales = tareas.length;
+
   for (let tarea of tareas) {
-    html += `<li>${tarea.nombre} <button onclick="borrar(${tarea.id})">eliminar</button></li>`;
+    // checkbox
+    html += `<li>${tarea.nombre} <input type="checkbox" ${tarea.completada ? 'checked' : ''} onchange="marcarRealizada(${tarea.id}, this)"> <button onclick="borrar(${tarea.id})">eliminar</button></li>`;
+    idHtml += `<li>ID: ${tarea.id}</li>`;
   }
+
   listaDeTareas.innerHTML = html;
-  tareasRealizadas = tareasTotales - tareas.length;
+  listaDeId.innerHTML = idHtml;
+  tareasRealizadas = tareas.filter(tarea => tarea.completada).length;
   actualizarResumen();
 }
 
 function actualizarResumen() {
-  // Actualizamos el contenido del elemento en el DOM
   resumenTareas.textContent = `Tareas realizadas: ${tareasRealizadas}, Tareas totales: ${tareasTotales}`;
 }
 
 btnAgregar.addEventListener("click", () => {
-  const nuevaTarea = { id: Date.now(), nombre: tareaInput.value };
+  const nuevaTarea = { id: generarId(), nombre: tareaInput.value, completada: false };
   tareas.push(nuevaTarea);
   tareaInput.value = "";
   renderTareas();
@@ -34,4 +39,14 @@ function borrar(id) {
   const index = tareas.findIndex((ele) => ele.id == id);
   tareas.splice(index, 1);
   renderTareas();
+}
+
+function marcarRealizada(id, checkbox) {
+  const tarea = tareas.find((ele) => ele.id == id);
+  tarea.completada = checkbox.checked;
+  renderTareas();
+}
+
+function generarId() {
+  return Math.floor(Math.random() * 100);
 }
