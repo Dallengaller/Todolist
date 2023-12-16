@@ -14,7 +14,7 @@ function renderTareas() {
 
   for (let tarea of tareas) {
     // checkbox
-    html += `<li>${tarea.nombre} <input type="checkbox" ${tarea.completada ? 'checked' : ''} onchange="marcarRealizada(${tarea.id}, this)"> <button onclick="borrar(${tarea.id})">eliminar</button></li>`;
+    html += `<li><p>${tarea.nombre}</p> <input type="checkbox" ${tarea.completada ? 'checked' : ''} onchange="marcarRealizada(${tarea.id}, this)"> <button onclick="borrar(${tarea.id})">eliminar</button></li>`;
     idHtml += `<li>ID: ${tarea.id}</li>`;
   }
 
@@ -23,6 +23,7 @@ function renderTareas() {
   tareasRealizadas = tareas.filter(tarea => tarea.completada).length;
   actualizarResumen();
 }
+
 
 function actualizarResumen() {
   resumenTareas.textContent = `Tareas realizadas: ${tareasRealizadas}, Tareas totales: ${tareasTotales}`;
