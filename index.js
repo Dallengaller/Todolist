@@ -3,7 +3,11 @@ const listaDeTareas = document.querySelector("#tareas");
 const tareaInput = document.querySelector("#nuevaTarea");
 const btnAgregar = document.querySelector("#agregarTarea");
 const resumenTareas = document.querySelector("#resumenTareas");
-const tareas = [];
+const tareas = [
+  { id: generarId(), nombre: "Terminar desafio", completada: true },
+  { id: generarId(), nombre: "Subir desafio", completada: true },
+  { id: generarId(), nombre: "Ir a dormir", completada: false }
+];
 let tareasRealizadas = 0;
 let tareasTotales = 0;
 
@@ -23,7 +27,6 @@ function renderTareas() {
   tareasRealizadas = tareas.filter(tarea => tarea.completada).length;
   actualizarResumen();
 }
-
 
 function actualizarResumen() {
   resumenTareas.textContent = `Tareas realizadas: ${tareasRealizadas}, Tareas totales: ${tareasTotales}`;
@@ -51,3 +54,6 @@ function marcarRealizada(id, checkbox) {
 function generarId() {
   return Math.floor(Math.random() * 100);
 }
+
+// Renderizar las tareas iniciales
+renderTareas();
